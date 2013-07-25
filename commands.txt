@@ -1,0 +1,3 @@
+ino build -m atmega328
+ino upload -p /dev/tty.usbserial-A8008J7B -m atmega328
+ino serial (Exit with ctrl+a,ctrl+x)

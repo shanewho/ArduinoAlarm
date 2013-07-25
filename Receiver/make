@@ -1,0 +1,20 @@
+#include <stdint.h>
+#include <VirtualWire.h>
+#include "DoorSensor.h"
+
+class App {
+
+public:
+
+  App() {
+  }
+
+  ~App() {
+  }
+  
+ void loop();
+
+private:
+ //DoorSensor door_sensor_;
+
+};
