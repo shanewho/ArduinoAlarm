@@ -1,10 +1,14 @@
+#ifndef SIREN_H
+#define SIREN_H
 
-class Alarm {
+class Siren {
 public: 
-  Alarm(int speakerPin);
-  ~Alarm();
+  Siren(int speakerPin);
+  ~Siren();
   void chime();
 private:
   int speakerPin;
   
 };
+
+#endif

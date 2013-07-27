@@ -1,17 +1,17 @@
-#include "Alarm.h"
+#include "Siren.h"
 #include "arduino.h"
 
-Alarm::Alarm(int speakerPin) :
+Siren::Siren(int speakerPin) :
     speakerPin(speakerPin) {
     pinMode(speakerPin, OUTPUT);
 }
 
-Alarm::~Alarm() {
+Siren::~Siren() {
 }
   
-void Alarm::chime() {
+void Siren::chime() {
     for(int i = 0; i < 4; i++){
-        tone(speakerPin, 3000, 120);
+        tone(speakerPin, 3500, 75);
         delay(125);
     }
 }

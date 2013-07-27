@@ -5,7 +5,7 @@
 
 .build/atmega328/src/sketch.cpp : src/sketch.ino
 	@mkdir -p .build/atmega328/src
-	@echo src/sketch.ino
+	@echo [93msrc/sketch.ino[0m
 	@/usr/local/bin/ino preproc  -o $@ $^
 
 

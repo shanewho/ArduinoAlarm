@@ -1,23 +1,55 @@
+#include "Loop.h"
 #include "DoorSensor.h"
-#include <VirtualWire.h>
 
-int DoorSensor::check() {
-    uint8_t buf[VW_MAX_MESSAGE_LEN];
-    uint8_t buflen = VW_MAX_MESSAGE_LEN;
-    if (vw_get_message(buf, &buflen))      // We check if we have received data
-    {
-        buf[buflen] = 0;
-        if(strcmp((char*)buf, "TRIGGERED") == 0) {
-            return 1;
+#define couloir 12449942
+#define porte 13464924
+
+DoorSensor::DoorSensor(DoorSensorHandler *handler) : 
+    sensor_tripped_handler_(handler),
+    last_trip_(0) {
+}
+
+DoorSensor::~DoorSensor() {
+}
+
+void DoorSensor::enable() {
+    Loop::subscribe(this);
+    mySwitch.enableReceive(0);
+}
+
+void DoorSensor::on_loop() {
+    //Serial.print("l");
+    check();
+}
+
+void DoorSensor::check() {
+
+    if (mySwitch.available()) {
+        int value = mySwitch.getReceivedValue();
+
+        unsigned long last_millis = millis(); 
+        bool duplicate = ((last_millis - last_trip_) < 1000);
+        last_trip_ = last_millis;
+
+        if(!duplicate) {
+            sensor_tripped_handler_->on_sensor_tripped(value);
+            //while (!Serial);
+
+            switch (value) {
+                case porte:
+                    Serial.println("Door");
+                    break;
+                case couloir:
+                    Serial.println("Hallway");
+                    break;
+                default:
+                    Serial.print("Unknown zone");
+                    Serial.println(value);
+                    break;
+            }
         }
-        Serial.print((char*)buf);
-        /*    int i;
-        // Message with proper check    
-        for (i = 0; i < buflen; i++)
-        {
-        Serial.write(buf[i]);  // The received data is stored in the buffer
-        // and sent through the serial port to the computer
-        }*/
-        //Serial.println();
+
+        mySwitch.resetAvailable();
     }
 }
+

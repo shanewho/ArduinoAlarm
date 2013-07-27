@@ -9,4 +9,6 @@
   /Applications/Arduino.app/Contents/Resources/Java/hardware/arduino/cores/arduino/Printable.h \
   /Applications/Arduino.app/Contents/Resources/Java/hardware/arduino/cores/arduino/new.h \
   /Applications/Arduino.app/Contents/Resources/Java/hardware/arduino/variants/standard/pins_arduino.h \
-  src/App.h lib/VirtualWire/VirtualWire.h
+  src/App.h src/Alarm.h src/DoorSensor.h src/Loop.h \
+  /Applications/Arduino.app/Contents/Resources/Java/hardware/arduino/cores/arduino/arduino.h \
+  lib/RCswitch/RCSwitch.h src/Siren.h

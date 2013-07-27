@@ -1,5 +1,7 @@
+#ifndef APP_H_
+#define APP_H_
+
 #include <stdint.h>
-#include <VirtualWire.h>
 #include "Alarm.h"
 #include "DoorSensor.h"
 
@@ -12,7 +14,8 @@ public:
   void loop();
 
 private:
-  DoorSensor door_sensor_;
   Alarm alarm_;
 
 };
+
+#endif

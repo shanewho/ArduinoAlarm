@@ -1,19 +1,16 @@
 #include "App.h"
-#include <VirtualWire.h>
-App app;
+App *app;
  
 void setup()
 {
     Serial.begin(9600);          // Configure the serial connection to the computer
-    vw_set_ptt_inverted(true);  // Required by the RF module
-    vw_setup(2000);            // bps connection speed
-    vw_set_rx_pin(3);         // Arduino pin to connect the receiver data pin
-    vw_rx_start();           // Start the receiver
+    while (!Serial) ;
+    Serial.println("Booting...");
+    app = new App();
 }
  
 void loop()
 {
-  app.loop();
-  
+    app->loop();
 }
 
